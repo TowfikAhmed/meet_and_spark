@@ -9,8 +9,7 @@ export const metadata: Metadata = {
     default: 'Spark Meet | Conference app',
     template: '%s',
   },
-  description:
-    'LiveKit is an open source WebRTC project that gives you everything needed to build scalable and real-time audio and/or video experiences in your applications.',
+  description: 'You have a meeting with your friends.',
   twitter: {
     creator: '@livekitted',
     site: '@livekitted',
