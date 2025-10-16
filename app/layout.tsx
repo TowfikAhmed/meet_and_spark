@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     url: 'https://meet.livekit.io',
     images: [
       {
-        url: 'https://meet.livekit.io/images/livekit-meet-open-graph.png',
+        url: 'https://meet.livekit.io/images/livekit-meet-open-graph2.png',
         width: 2000,
         height: 1000,
         type: 'image/png',
