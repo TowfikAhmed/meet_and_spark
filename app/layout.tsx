@@ -16,16 +16,16 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
   },
   openGraph: {
-    url: 'https://meet.livekit.io',
+    url: 'https://meet.sparkcoin.uk',
     images: [
       {
-        url: 'https://meet.livekit.io/images/livekit-meet-open-graph2.png',
+        url: 'https://meet.sparkcoin.uk/images/livekit-meet-open-graph.png',
         width: 2000,
         height: 1000,
         type: 'image/png',
       },
     ],
-    siteName: 'LiveKit Meet',
+    siteName: 'Spark Meet',
   },
   icons: {
     icon: {
