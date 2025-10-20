@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { PageClientImpl } from './PageClientImpl';
+import { PageClientImpl } from '@/components/PageClientImpl';
 import { isVideoCodec } from '@/lib/types';
 
 export default async function Page({
