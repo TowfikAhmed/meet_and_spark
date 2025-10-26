@@ -9,9 +9,12 @@ export default async function Page() {
 
   return (
     <ul>
-      {todos?.map((todo) => (
-        <li>{todo}</li>
-      ))}
+-      {todos?.map((todo) => (
+-        <li>{todo}</li>
+-      ))}
++      {todos?.map((todo, idx) => (
++        <li key={idx}>{todo}</li>
++      ))}
     </ul>
   );
 }
