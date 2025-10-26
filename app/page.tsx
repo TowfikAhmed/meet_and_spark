@@ -55,8 +55,32 @@ function DemoMeetingTab(props: { label: string }) {
   return (
     <div className={styles.tabContent}>
       <p style={{ margin: 0 }}>Make it easy, beautiful, enjoyable.</p>
-      <button style={{ marginTop: '1rem' }} className="lk-button" onClick={startMeeting}>
-        Start Meeting
+      <button
+        style={{
+          marginTop: '1rem',
+          padding: '1rem 2rem',
+          color: '#ffffffff',
+          background: 'linear-gradient(135deg, #8d8d8b44 0%, #15022059 100%)',
+          border: 'none',
+          borderRadius: '2rem',
+          boxShadow: '0 8px 20px rgba(14, 14, 14, 0.23)',
+          cursor: 'pointer',
+          fontWeight: 'bold',
+          transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+          outline: 'none',
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.transform = 'translateY(-2px)';
+          e.currentTarget.style.boxShadow = '0 12px 24px rgba(97, 69, 68, 0.2)';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.transform = 'translateY(0)';
+          e.currentTarget.style.boxShadow = '0 8px 20px rgba(118, 75, 162, 0.1)';
+        }}
+        className="lk-button"
+        onClick={startMeeting}
+      >
+        Start Meetings
       </button>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
         {/* <div style={{ display: 'flex', flexDirection: 'row', gap: '1rem' }}>
@@ -88,10 +112,10 @@ export default function Page() {
   return (
     <>
       <main className={styles.main} data-lk-theme="default">
-        <div className="header">
-          <img src="/images/logo.png" alt="LiveKit Meet" width="160" />
-          <h2>Spark Video Conferencing.</h2>
-        </div>
+        <header className="header" role="banner">
+          <img className="logo" src="/images/logo.gif" alt="MEET logo" />
+          <h2>Business & Social Video Conferencing.</h2>
+        </header>
         <Suspense fallback="Loading">
           <DemoMeetingTab label="Demo" />
         </Suspense>
