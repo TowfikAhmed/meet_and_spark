@@ -6,7 +6,7 @@ import { Toaster } from 'react-hot-toast';
 
 export const metadata: Metadata = {
   title: {
-    default: 'Business Meet | Conference app',
+    default: 'Business Meet | Conference app.',
     template: '%s',
   },
   description: 'You have a meeting with your friends.',
