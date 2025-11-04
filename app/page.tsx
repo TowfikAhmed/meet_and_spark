@@ -1,124 +1,35 @@
-'use client';
-
-import { useRouter, useSearchParams } from 'next/navigation';
 import React, { Suspense, useState } from 'react';
-import { encodePassphrase, generateRoomId, randomString } from '@/lib/client-utils';
-import styles from '../styles/Home.module.css';
+import PageClientAuthCard from '@/components/PageClientAuthCard';
+import PageMeetingOnboarding from '@/components/PageMeetingOnboarding';
+import { headers } from 'next/headers';
 
-function Tabs(props: React.PropsWithChildren<{}>) {
-  const searchParams = useSearchParams();
-  const tabIndex = searchParams?.get('tab') === 'custom' ? 1 : 0;
+export default async function Page() {
+  const hdrs = await headers();
+  const host = hdrs.get('host') || 'localhost:3000';
+  const protocol = hdrs.get('x-forwarded-proto') || (process.env.VERCEL ? 'https' : 'http');
+  const apiUrl = `${protocol}://${host}/api/supabase`;
 
-  const router = useRouter();
-  function onTabSelected(index: number) {
-    const tab = index === 1 ? 'custom' : 'demo';
-    router.push(`/?tab=${tab}`);
-  }
+  const { url, anonKey } = await fetch(apiUrl, { cache: 'no-store' }).then((r) => r.json());
 
-  let tabs = React.Children.map(props.children, (child, index) => {
-    return (
-      <button
-        className="lk-button"
-        onClick={() => {
-          if (onTabSelected) {
-            onTabSelected(index);
-          }
-        }}
-        aria-pressed={tabIndex === index}
-      >
-        {/* @ts-ignore */}
-        {child?.props.label}
-      </button>
-    );
-  });
-
-  return (
-    <div className={styles.tabContainer}>
-      <div className={styles.tabSelect}>{tabs}</div>
-      {/* @ts-ignore */}
-      {props.children[tabIndex]}
-    </div>
-  );
-}
-
-function DemoMeetingTab(props: { label: string }) {
-  const router = useRouter();
-  const [e2ee, setE2ee] = useState(false);
-  const [sharedPassphrase, setSharedPassphrase] = useState(randomString(64));
-  const startMeeting = () => {
-    if (e2ee) {
-      router.push(`/rooms/${generateRoomId()}#${encodePassphrase(sharedPassphrase)}`);
-    } else {
-      router.push(`/rooms/${generateRoomId()}`);
-    }
-  };
-  return (
-    <div className={styles.tabContent}>
-      <p style={{ margin: 0 }}>Make it easy, beautiful, enjoyable.</p>
-      <button
-        style={{
-          marginTop: '1rem',
-          padding: '1rem 2rem',
-          color: '#ffffffff',
-          background: 'linear-gradient(135deg, #8d8d8b44 0%, #15022059 100%)',
-          border: 'none',
-          borderRadius: '2rem',
-          boxShadow: '0 8px 20px rgba(14, 14, 14, 0.23)',
-          cursor: 'pointer',
-          fontWeight: 'bold',
-          transition: 'transform 0.2s ease, box-shadow 0.2s ease',
-          outline: 'none',
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.transform = 'translateY(-2px)';
-          e.currentTarget.style.boxShadow = '0 12px 24px rgba(97, 69, 68, 0.2)';
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.transform = 'translateY(0)';
-          e.currentTarget.style.boxShadow = '0 8px 20px rgba(118, 75, 162, 0.1)';
-        }}
-        className="lk-button"
-        onClick={startMeeting}
-      >
-        Start Meetings
-      </button>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-        {/* <div style={{ display: 'flex', flexDirection: 'row', gap: '1rem' }}>
-          <input
-            id="use-e2ee"
-            type="checkbox"
-            checked={e2ee}
-            onChange={(ev) => setE2ee(ev.target.checked)}
-          ></input>
-          <label htmlFor="use-e2ee">Enable end-to-end encryption</label>
-        </div> */}
-        {e2ee && (
-          <div style={{ display: 'flex', flexDirection: 'row', gap: '1rem' }}>
-            <label htmlFor="passphrase">Passphrase</label>
-            <input
-              id="passphrase"
-              type="password"
-              value={sharedPassphrase}
-              onChange={(ev) => setSharedPassphrase(ev.target.value)}
-            />
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
-
-export default function Page() {
   return (
     <>
-      <main className={styles.main} data-lk-theme="default">
-        <header className="header" role="banner">
-          <img className="logo" src="/images/logo.gif" alt="MEET logo" />
-          <h2>Business & Social Video Conferencing.</h2>
-        </header>
-        <Suspense fallback="Loading">
-          <DemoMeetingTab label="Demo" />
-        </Suspense>
+      <img
+        className=" w-screen absolute z-[-100] top-0 left-0 object-contain opacity-20"
+        src="/images/bg_cover.svg"
+        alt="MEET logo"
+      />
+      <main
+        data-lk-theme="default"
+        className="relative z-1 w-full max-w-6xl mx-auto h-screen flex flex-col md:flex-row items-center justify-center"
+      >
+        <section className="relative flex-1 flex flex-col items-center justify-center  gap-6">
+          <img className="h-16" src="/images/logo.gif" alt="MEET logo" />
+          <h2 className="text-dim">Business & Social Video Conferencing.</h2>
+          <PageMeetingOnboarding />
+        </section>
+        <div className="flex-1">
+          <PageClientAuthCard url={url} anonKey={anonKey} />
+        </div>
       </main>
     </>
   );

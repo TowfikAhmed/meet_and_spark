@@ -6,7 +6,7 @@ import { Toaster } from 'react-hot-toast';
 
 export const metadata: Metadata = {
   title: {
-    default: 'Spark Meet | Conference app',
+    default: 'Business Meet | Conference app',
     template: '%s',
   },
   description: 'You have a meeting with your friends.',
@@ -50,7 +50,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body data-lk-theme="default">
+      <body className="dark" data-lk-theme="default">
         <Toaster />
         {children}
       </body>
