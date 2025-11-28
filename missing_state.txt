@@ -1,0 +1,11 @@
+// Add these state declarations at the beginning of WorkspaceScreen component (after line 53):
+  
+// UI State  
+const [isMobile, setIsMobile] = useState(false);
+const [isSidebarOpen, setSidebarOpen] = useState(true);
+const [activeApp, setActiveApp] = useState<SubApp>('messaging');
+const [activeModal, setActiveModal] = useState<'none' | 'newChat' | 'createMeeting' | 'profileMenu' | 'newLabel' | 'newMeeting'>('none');
+
+// Messaging
+const [chats, setChats] = useState(defaultChats);
+const [selectedChat, setSelectedChat] = useState<{id: string, name: string, group: boolean, online: boolean, msg: string} | null>(null);
