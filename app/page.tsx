@@ -17,7 +17,7 @@ export default async function Page() {
         data-lk-theme="default"
         className="relative z-1 w-full max-w-6xl mx-auto h-screen flex flex-col md:flex-row items-center justify-center"
       >
-        aaaaaaa
+        Something was here
       </main>
     </>
   );
