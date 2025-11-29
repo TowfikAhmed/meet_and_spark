@@ -96,6 +96,8 @@ const WorkspaceScreen: React.FC<Props> = ({ onLogout }) => {
     id: string;
     name: string;
     group: boolean;
+    online?: boolean;
+    msg?: string;
   } | null>(null);
 
   // Modals State
