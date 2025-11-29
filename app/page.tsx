@@ -1157,8 +1157,8 @@ export default function Page() {
           left: 3px;
           bottom: 3px;
           background-color: white;
-          transition: 0.3s;
           border-radius: 50%;
+          transition: 0.3s;
         }
         input:checked + .slider {
           background-color: var(--accent);
